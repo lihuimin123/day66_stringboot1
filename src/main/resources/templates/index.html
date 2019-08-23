@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:HH="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ index
+ <!-- 无法获取数据 -->
+${info}<br/>
+<!-- th：text 设置标签的文本内容
+${}变量表达式
+-->
+ <div th:text="${info}"></div> <!-- 数据在model中 -->
+ <div th:text="${name}"></div> <!-- 数据在request -->
+ <div th:text="${#request.getAttribute('name')}"></div> <!-- 数据在request -->
+
+ <div th:text="${age}"></div>  <!-- session中 无法获取-->
+ <div th:text="${session.age}"></div>  <!-- 在session中应该这样书写-->
+ <div th:text="${#session.getAttribute('age')}"></div>  <!-- 内置对象 -->
+ <div th:text="${#dates.format(birth,'yyyy-MM-dd HH:mm:ss')}"></div>  <!--  -->
+
+
+ <form>
+     name<input type="text" th:value="${user.name}">
+     age<input type="text" th:value="${user.age}">
+     qq<input type="text" th:value="${user.qq}">
+ </form>
+
+ <!--*{} 选择变量表达式 和 th：object 配合使用 -->
+ <form th:object="${user}">
+     name<input type="text" th:value="*{name}">
+     age<input type="text" th:value="*{age}">
+     qq<input type="text" th:value="*{qq}">
+ </form>
+</body>
+</html>
